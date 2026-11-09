@@ -64,17 +64,37 @@ class MockDataFrame:
         return MockSeries({c: self._row_count * 8 for c in self._cols})
 
     def drop_duplicates(self, subset=None):
-        new_data = {c: self._data[c][: max(1, self._row_count - 2)] for c in self._cols}
+        cols_to_check = subset if subset else self._cols
+        seen = set()
+        filtered_indices = []
+        for i in range(self._row_count):
+            key = tuple(self._data[col][i] for col in cols_to_check)
+            if key not in seen:
+                seen.add(key)
+                filtered_indices.append(i)
+        new_data = {c: [self._data[c][i] for i in filtered_indices] for c in self._cols}
         return MockDataFrame(new_data)
 
     def query(self, expr: str):
-        new_data = {c: self._data[c][: max(0, self._row_count // 2)] for c in self._cols}
+        filtered_indices = []
+        for i in range(self._row_count):
+            row_dict = {col: self._data[col][i] for col in self._cols}
+            try:
+                if eval(expr, {}, row_dict):
+                    filtered_indices.append(i)
+            except Exception:
+                pass
+        new_data = {c: [self._data[c][i] for i in filtered_indices] for c in self._cols}
         return MockDataFrame(new_data)
 
     def dropna(self, subset=None):
-        new_data = {c: [x for x in self._data[c] if x is not None] for c in self._cols}
-        min_len = min((len(v) for v in new_data.values()), default=0)
-        new_data = {c: v[:min_len] for c, v in new_data.items()}
+        cols_to_check = subset if subset else self._cols
+        filtered_indices = []
+        for i in range(self._row_count):
+            has_na = any(self._data[col][i] is None for col in cols_to_check)
+            if not has_na:
+                filtered_indices.append(i)
+        new_data = {c: [self._data[c][i] for i in filtered_indices] for c in self._cols}
         return MockDataFrame(new_data)
 
     def assign(self, **kwargs):

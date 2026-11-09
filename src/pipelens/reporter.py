@@ -58,11 +58,11 @@ class PipelineReporter:
 
         # Step-by-Step Table
         table = Table(title="Pipeline Step-by-Step Execution", border_style="dim", header_style="bold magenta")
-        table.add_column("#", style="dim", width=4, justify="center")
-        table.add_column("Operation", style="bold white", width=26)
-        table.add_column("Rows", justify="right", width=18)
-        table.add_column("Cols", justify="center", width=10)
-        table.add_column("Time", justify="right", width=9)
+        table.add_column("#", style="dim", justify="center")
+        table.add_column("Operation", style="bold white")
+        table.add_column("Rows", justify="right")
+        table.add_column("Cols", justify="center")
+        table.add_column("Time", justify="right")
         table.add_column("Insights & Alerts", style="white")
 
         for s in history:
