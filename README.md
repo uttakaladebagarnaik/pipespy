@@ -1,6 +1,6 @@
 # 🔍 PipeLens
 
-[![PyPI version](https://img.shields.io/pypi/v/pipelens.svg?color=blue)](https://pypi.org/project/pipelens/)
+[![PyPI version](https://img.shields.io/pypi/v/pipelens-py.svg?color=blue)](https://pypi.org/project/pipelens-py/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#)
@@ -84,7 +84,7 @@ clean_df = (
 ## 📦 Installation
 
 ```bash
-pip install pipelens
+pip install pipelens-py
 ```
 
 *Requirements:* Python 3.8+, `pandas`, `rich`.
