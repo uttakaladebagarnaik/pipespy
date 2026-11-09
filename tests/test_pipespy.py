@@ -6,8 +6,8 @@ import pytest
 import sys
 from pathlib import Path
 
-# Add src to sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+# Add project root to sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from pipespy import Lens, watch, Spy, StepDiff, DataSnapshot
 from pipespy.diff import take_snapshot, compute_diff, is_dataframe

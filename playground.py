@@ -12,7 +12,6 @@ if hasattr(sys.stdout, "reconfigure"):
 
 # PipeSpy aur test helper ko load karte hain
 project_root = Path(__file__).resolve().parent
-sys.path.insert(0, str(project_root / "src"))
 sys.path.insert(0, str(project_root))
 
 from pipespy import watch, Spy

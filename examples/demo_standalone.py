@@ -11,7 +11,6 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 project_root = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(project_root / "src"))
 sys.path.insert(0, str(project_root))
 
 from pipespy import Spy
