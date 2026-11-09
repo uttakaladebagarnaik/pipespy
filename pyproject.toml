@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pipelens"
+version = "0.1.0"
+authors = [
+    { name = "Pipelens Contributor", email = "developer@example.com" },
+]
+description = "A lightweight pipeline debugger and automated story insight engine for Pandas."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["pandas", "data-analytics", "pipeline", "debugging", "profiling", "data-quality", "insights"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "pandas>=1.3.0",
+    "rich>=12.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/pipelens"
+"Bug Tracker" = "https://github.com/yourusername/pipelens/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
