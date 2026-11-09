@@ -1,5 +1,5 @@
 """
-demo_standalone.py - Visual demonstration of PipeSpy in the terminal.
+demo_standalone.py - Visual demonstration of PipeTrace in the terminal.
 Runs instantly in any environment (even without external pandas binary requirements).
 """
 
@@ -13,12 +13,12 @@ if hasattr(sys.stdout, "reconfigure"):
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from pipespy import Spy
-from tests.test_pipespy import MockDataFrame
+from pipetrace import trace
+from tests.test_pipetrace import MockDataFrame
 
 
 def main():
-    print("🚀 Initializing PipeSpy Pipeline Audit...\n")
+    print("🚀 Initializing PipeTrace Pipeline Audit...\n")
 
     # Mock customer dataset (raw messy records)
     raw_data = MockDataFrame({
@@ -31,9 +31,9 @@ def main():
 
     print(f"📦 Loaded Dataset: {raw_data.shape[0]} rows × {raw_data.shape[1]} columns.\n")
 
-    # Run pipeline with PipeSpy tracking
+    # Run pipeline with PipeTrace tracking
     clean_df = (
-        Spy(raw_data)
+        trace(raw_data)
         .drop_duplicates(subset=["customer_id"])
         .query("age >= 18")
         .dropna(subset=["email"])

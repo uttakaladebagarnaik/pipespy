@@ -1,4 +1,4 @@
-name: Publish PipeSpy to PyPI
+name: Publish PipeTrace to PyPI
 
 on:
   release:

@@ -3,7 +3,7 @@ reporter.py - Visual formatting and rendering of pipeline audit reports.
 """
 
 from typing import Any, List
-from pipespy.diff import StepDiff
+from pipetrace.diff import StepDiff
 
 try:
     import pandas as pd
@@ -25,7 +25,7 @@ class PipelineReporter:
     """Renders the execution history and step insights into rich terminal or text formats."""
 
     @staticmethod
-    def render_terminal(history: List[StepDiff], title: str = "PipeSpy Pipeline Audit"):
+    def render_terminal(history: List[StepDiff], title: str = "PipeTrace Pipeline Audit"):
         """Render beautiful terminal report using Rich if available, else plain text."""
         if not history:
             print("No transformation steps recorded.")
@@ -46,7 +46,7 @@ class PipelineReporter:
 
         # Header Banner
         banner_text = Text()
-        banner_text.append("🕵️ PipeSpy Data Audit & Insights\n", style="bold cyan")
+        banner_text.append("🔍 PipeTrace Data Audit & Insights\n", style="bold cyan")
         banner_text.append(f"Initial: {initial_shape[0]:,} rows × {initial_shape[1]} cols  ➔  ", style="dim")
         banner_text.append(f"Final: {final_shape[0]:,} rows × {final_shape[1]} cols\n", style="bold green")
 

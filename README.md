@@ -1,13 +1,13 @@
-# 🕵️ PipeSpy
+# 🔍 PipeTrace
 
-[![PyPI version](https://img.shields.io/pypi/v/pipespy.svg?color=blue)](https://pypi.org/project/pipespy/)
+[![PyPI version](https://img.shields.io/pypi/v/pipetrace.svg?color=blue)](https://pypi.org/project/pipetrace/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#)
 
 > **A lightweight, non-intrusive pipeline debugger and automated story insight engine for Pandas.**
 
-Stop writing `print(df.shape)` after every single line of your Pandas pipelines. **PipeSpy** seamlessly spies on row losses, column mutations, unexpected `NaN` introductions, and join explosions — giving you a clean visual X-ray and automated story insights at the end of your pipeline.
+Stop writing `print(df.shape)` after every single line of your Pandas pipelines. **PipeTrace** seamlessly traces row losses, column mutations, unexpected `NaN` introductions, and join explosions — giving you a clean visual X-ray and automated story insights at the end of your pipeline.
 
 ---
 
@@ -28,21 +28,21 @@ clean_df = (
 
 Debugging this usually requires breaking the chain and adding dozens of temporary `print()` statements.
 
-## 💡 The PipeSpy Solution
+## 💡 The PipeTrace Solution
 
-Wrap your DataFrame in `Spy()` (or `watch()`). PipeSpy intercepts every step, records structural diffs, generates smart alerts, and prints a gorgeous audit report:
+Wrap your DataFrame in `trace()` (or `watch()`). PipeTrace intercepts every step, records structural diffs, generates smart alerts, and prints a gorgeous audit report:
 
 ```python
 import pandas as pd
-from pipespy import Spy
+from pipetrace import trace
 
 clean_df = (
-    Spy(raw_customers)
+    trace(raw_customers)
     .drop_duplicates(subset=["id"])
     .query("age >= 18")
     .merge(orders, on="id", how="left")
     .dropna(subset=["email"])
-    .report(title="Customer Cleaning Pipeline") # 🕵️ Audit report printed & clean DataFrame returned!
+    .report(title="Customer Cleaning Pipeline") # 🔍 Audit report printed & clean DataFrame returned!
 )
 ```
 
@@ -50,7 +50,7 @@ clean_df = (
 
 ```text
 ┌─────────────────── ⚡ Customer Cleaning Pipeline ───────────────────────────┐
-│ 🕵️ PipeSpy Data Audit & Insights                                            │
+│ 🔍 PipeTrace Data Audit & Insights                                          │
 │ Initial: 10,000 rows × 5 cols  ➔  Final: 8,420 rows × 8 cols                │
 │ Net Row Change: -1,580 rows | Total Time: 42.1ms                            │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -69,7 +69,7 @@ clean_df = (
 
 ## 🚀 Key Features
 
-- **Zero-Friction Chaining:** `Spy(df)` wraps your DataFrame transparently. Any standard Pandas operation (`query`, `drop_duplicates`, `merge`, `fillna`, `assign`, etc.) works as normal.
+- **Zero-Friction Chaining:** `trace(df)` wraps your DataFrame transparently. Any standard Pandas operation (`query`, `drop_duplicates`, `merge`, `fillna`, `assign`, etc.) works as normal.
 - **Automated Insights & Alerts:**
   - 🚨 **Empty DataFrame Alert:** Immediately warns if any filter wiped out all data (0 rows).
   - 💥 **Join / Cartesian Explosion:** Alerts if a `merge` multiplied rows due to duplicate join keys.
@@ -84,7 +84,7 @@ clean_df = (
 ## 📦 Installation
 
 ```bash
-pip install pipespy
+pip install pipetrace
 ```
 
 *Requirements:* Python 3.8+, `pandas`, `rich`.
@@ -97,12 +97,12 @@ pip install pipespy
 
 ```python
 import pandas as pd
-from pipespy import Spy
+from pipetrace import trace
 
 df = pd.read_csv("sales_data.csv")
 
 clean_df = (
-    Spy(df)
+    trace(df)
     .drop_duplicates(subset=["transaction_id"])
     .query("amount > 0")
     .assign(tax=lambda d: d["amount"] * 0.18)
@@ -116,7 +116,7 @@ Want real-time console feedback as each step executes? Enable `live=True`:
 
 ```python
 clean_df = (
-    Spy(df, live=True)
+    trace(df, live=True)
     .drop_duplicates()
     .query("status == 'active'")
     .to_df()
@@ -135,4 +135,4 @@ python -m pytest tests/ -v
 
 ## 📄 License
 
-MIT License. Feel free to use, modify, and contribute!
+MIT License. (c) 2026 Uttakaladeba Garnaik & Contributors.

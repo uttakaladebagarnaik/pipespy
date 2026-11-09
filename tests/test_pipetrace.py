@@ -1,5 +1,5 @@
 """
-test_pipespy.py - Comprehensive Unit test suite for PipeSpy.
+test_pipetrace.py - Comprehensive Unit test suite for PipeTrace.
 """
 
 import pytest
@@ -9,10 +9,10 @@ from pathlib import Path
 # Add project root to sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from pipespy import Lens, watch, Spy, StepDiff, DataSnapshot
-from pipespy.diff import take_snapshot, compute_diff, is_dataframe
-from pipespy.insights import InsightEngine
-from pipespy.reporter import PipelineReporter
+from pipetrace import Lens, watch, trace, Trace, StepDiff, DataSnapshot
+from pipetrace.diff import take_snapshot, compute_diff, is_dataframe
+from pipetrace.insights import InsightEngine
+from pipetrace.reporter import PipelineReporter
 
 
 class MockSeries:
@@ -122,7 +122,7 @@ def test_is_dataframe():
 
 
 def test_invalid_type_raises():
-    with pytest.raises(TypeError, match="PipeSpy expects a DataFrame-like object"):
+    with pytest.raises(TypeError, match="PipeTrace expects a DataFrame-like object"):
         Lens("invalid string")
 
 
@@ -196,7 +196,7 @@ def test_live_logging(capsys):
     lens = watch(df, live=True)
     _ = lens.drop_duplicates()
     captured = capsys.readouterr()
-    assert "[PipeSpy Live]" in captured.out
+    assert "[PipeTrace Live]" in captured.out
 
 
 def test_insight_engine_high_loss_alert():

@@ -5,9 +5,9 @@ tracker.py - Core Lens proxy for intercepting and tracking DataFrame operations.
 import time
 from typing import Any, Callable, List, Optional
 
-from pipespy.diff import take_snapshot, compute_diff, is_dataframe, StepDiff
-from pipespy.insights import InsightEngine
-from pipespy.reporter import PipelineReporter
+from pipetrace.diff import take_snapshot, compute_diff, is_dataframe, StepDiff
+from pipetrace.insights import InsightEngine
+from pipetrace.reporter import PipelineReporter
 
 
 class Lens:
@@ -20,7 +20,7 @@ class Lens:
         live: bool = False,
     ):
         if not is_dataframe(df):
-            raise TypeError(f"PipeSpy expects a DataFrame-like object with shape and columns, got {type(df).__name__}")
+            raise TypeError(f"PipeTrace expects a DataFrame-like object with shape and columns, got {type(df).__name__}")
 
         # Use object.__setattr__ to avoid triggering custom __setattr__
         object.__setattr__(self, "_df", df)
@@ -45,7 +45,7 @@ class Lens:
         """Return a summary of all pipeline steps."""
         return PipelineReporter.to_dataframe(self._history)
 
-    def report(self, title: str = "PipeSpy Pipeline Audit", return_df: bool = True) -> Any:
+    def report(self, title: str = "PipeTrace Pipeline Audit", return_df: bool = True) -> Any:
         """
         Render the visual audit report.
         If return_df=True (default), returns the clean DataFrame for smooth chaining.
@@ -95,7 +95,7 @@ class Lens:
 
             if self._live:
                 sign = "+" if diff.row_diff > 0 else ""
-                print(f"[PipeSpy Live] Step {step_num}: .{method_name}() -> Rows: {after_snap.shape[0]} ({sign}{diff.row_diff})")
+                print(f"[PipeTrace Live] Step {step_num}: .{method_name}() -> Rows: {after_snap.shape[0]} ({sign}{diff.row_diff})")
 
             new_history = list(self._history) + [diff]
             return Lens(result, history=new_history, live=self._live)
@@ -138,16 +138,16 @@ class Lens:
         return 0
 
     def __repr__(self) -> str:
-        return f"<PipeSpy [Steps: {len(self._history)}] wrapping DataFrame:\n{repr(self._df)}>"
+        return f"<PipeTrace [Steps: {len(self._history)}] wrapping DataFrame:\n{repr(self._df)}>"
 
     def _repr_html_(self) -> str:
         """Rich HTML display for Jupyter Notebooks."""
         summary_obj = self.summary()
-        summary_html = summary_obj.to_html(classes="pipespy-table", index=False) if hasattr(summary_obj, "to_html") else str(summary_obj)
+        summary_html = summary_obj.to_html(classes="pipetrace-table", index=False) if hasattr(summary_obj, "to_html") else str(summary_obj)
         preview_html = self._df.head(5)._repr_html_() if hasattr(self._df, "head") and hasattr(self._df.head(5), "_repr_html_") else f"<pre>{str(self._df)[:400]}</pre>"
         return f"""
         <div style="border: 2px solid #00acc1; border-radius: 8px; padding: 12px; margin: 8px 0; font-family: sans-serif;">
-            <h4 style="margin: 0 0 8px 0; color: #00838f;">🕵️ PipeSpy Audit History ({len(self._history)} steps)</h4>
+            <h4 style="margin: 0 0 8px 0; color: #00838f;">🔍 PipeTrace Audit History ({len(self._history)} steps)</h4>
             {summary_html}
             <details style="margin-top: 10px;">
                 <summary style="cursor: pointer; color: #555;">View Current DataFrame Preview</summary>
@@ -157,9 +157,10 @@ class Lens:
         """
 
 
-Spy = Lens
+trace = Lens
+Trace = Lens
 
 
 def watch(df: Any, live: bool = False) -> Lens:
-    """Convenience factory function: pipespy.watch(df) or pipespy.Spy(df)"""
+    """Convenience factory function: pipetrace.watch(df) or pipetrace.trace(df)"""
     return Lens(df, live=live)
