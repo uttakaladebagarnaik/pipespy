@@ -1,4 +1,4 @@
-name: Publish PipeLens to PyPI
+name: Publish PipeSpy to PyPI
 
 on:
   release:

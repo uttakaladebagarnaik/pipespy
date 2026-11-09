@@ -1,5 +1,5 @@
 """
-demo.py - Quick demonstration of PipeLens in action.
+demo.py - Quick demonstration of PipeSpy in action.
 """
 
 import sys
@@ -10,11 +10,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import pandas as pd
 import numpy as np
-from pipelens import watch
+from pipespy import Spy
 
 
 def main():
-    print("🚀 Running PipeLens Real-World Pipeline Demo...\n")
+    print("🚀 Running PipeSpy Real-World Pipeline Demo...\n")
 
     # 1. Create simulated messy customer data
     np.random.seed(42)
@@ -35,9 +35,9 @@ def main():
 
     print(f"📦 Loaded Raw Data: {raw_customers.shape[0]} rows, {raw_customers.shape[1]} columns.\n")
 
-    # 2. Pipeline transformation with PipeLens
+    # 2. Pipeline transformation with PipeSpy
     clean_df = (
-        watch(raw_customers)
+        Spy(raw_customers)
         # Step 1: Remove duplicates
         .drop_duplicates(subset=["id"])
         # Step 2: Remove minors & missing age

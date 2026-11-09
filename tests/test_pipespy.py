@@ -1,5 +1,5 @@
 """
-test_pipelens.py - Comprehensive Unit test suite for PipeLens.
+test_pipespy.py - Comprehensive Unit test suite for PipeSpy.
 """
 
 import pytest
