@@ -3,17 +3,17 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pipelens-py"
+name = "pipespy"
 version = "0.1.0"
 authors = [
-    { name = "Pipelens Contributor", email = "developer@example.com" },
+    { name = "Pipespy Contributor", email = "developer@example.com" },
 ]
 description = "A lightweight pipeline debugger and automated story insight engine for Pandas."
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE"]
-keywords = ["pandas", "data-analytics", "pipeline", "debugging", "profiling", "data-quality", "insights"]
+keywords = ["pandas", "data-analytics", "pipeline", "debugging", "profiling", "data-quality", "insights", "pipespy"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -34,8 +34,8 @@ dev = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/yourusername/pipelens"
-"Bug Tracker" = "https://github.com/yourusername/pipelens/issues"
+"Homepage" = "https://github.com/uttakaladebagarnaik/pipelens"
+"Bug Tracker" = "https://github.com/uttakaladebagarnaik/pipelens/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -3,7 +3,7 @@ insights.py - Heuristic story and anomaly generator for pipeline transitions.
 """
 
 from typing import Any, List, Tuple
-from pipelens.diff import StepDiff, DataSnapshot
+from pipespy.diff import StepDiff, DataSnapshot
 
 try:
     import pandas as pd
