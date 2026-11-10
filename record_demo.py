@@ -170,7 +170,7 @@ clean_df = (
     cta.append("🔗 PyPI:   ", style="dim")
     cta.append("https://pypi.org/project/pipetrace/\n", style="underline cyan")
     cta.append("⭐ GitHub: ", style="dim")
-    cta.append("https://github.com/uttakaladebagarnaik/pipespy\n", style="underline yellow")
+    cta.append("https://github.com/uttakaladebagarnaik/pipetrace\n", style="underline yellow")
     cta.append("💡 Open Source • Lightweight • Zero Config", style="italic green")
 
     console.print(Panel(cta, title="[bold magenta]🚀 PipeTrace v0.1.0[/bold magenta]", border_style="cyan"))
